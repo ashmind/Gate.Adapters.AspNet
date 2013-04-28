@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Gate.Adapters.AspNetMvc.IntegrationTests.WebSite.App_Start {
+namespace Gate.Adapters.AspNet.IntegrationTests.WebSite.App_Start {
     public class RouteConfig {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

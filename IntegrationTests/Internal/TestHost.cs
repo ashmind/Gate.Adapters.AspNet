@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
 
-namespace Gate.Adapters.AspNetMvc.IntegrationTests.Internal {
+namespace Gate.Adapters.AspNet.IntegrationTests.Internal {
     public static class TestHost {
         private const string UrlInternal = "http://localhost:8087";
 

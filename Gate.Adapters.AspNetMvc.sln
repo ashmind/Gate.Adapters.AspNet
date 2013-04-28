@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CD86A0
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNetMvc", "Main\Gate.Adapters.AspNetMvc.csproj", "{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNet", "Main\Gate.Adapters.AspNet.csproj", "{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNetMvc.IntegrationTests.WebSite", "IntegrationTests.WebSite\Gate.Adapters.AspNetMvc.IntegrationTests.WebSite.csproj", "{92B282E8-A2BC-499F-912C-DB8A89B8B469}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNet.IntegrationTests.WebSite", "IntegrationTests.WebSite\Gate.Adapters.AspNet.IntegrationTests.WebSite.csproj", "{92B282E8-A2BC-499F-912C-DB8A89B8B469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNetMvc.IntegrationTests", "IntegrationTests\Gate.Adapters.AspNetMvc.IntegrationTests.csproj", "{BDAF9111-8EF6-448B-8690-19E99A94D3C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNet.IntegrationTests", "IntegrationTests\Gate.Adapters.AspNet.IntegrationTests.csproj", "{BDAF9111-8EF6-448B-8690-19E99A94D3C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

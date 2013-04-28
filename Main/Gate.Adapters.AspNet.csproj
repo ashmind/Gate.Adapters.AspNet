@@ -7,8 +7,8 @@
     <ProjectGuid>{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gate.Adapters.AspNetMvc</RootNamespace>
-    <AssemblyName>Gate.Adapters.AspNetMvc</AssemblyName>
+    <RootNamespace>Gate.Adapters.AspNet</RootNamespace>
+    <AssemblyName>Gate.Adapters.AspNet</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -85,19 +85,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AspNetMvcAdapter.cs" />
-    <Compile Include="AspNetMvcInitializer.cs" />
-    <Compile Include="Integration\GateHttpBrowserCapabilities.cs" />
-    <Compile Include="Integration\GateHttpFileCollection.cs" />
-    <Compile Include="Integration\GateHttpServerUtility.cs" />
-    <Compile Include="Integration\RazorViewEngineWithoutBuildManager.cs" />
-    <Compile Include="Integration\RazorViewWithoutBuildManager.cs" />
-    <Compile Include="Integration\ValueProviderFactoryWithoutSupportForUnvalidated.cs" />
-    <Compile Include="Integration\ControllerFactoryWithoutBuildManager.cs" />
-    <Compile Include="Integration\MvcHandlerAccessor.cs" />
-    <Compile Include="Integration\GateHttpContext.cs" />
-    <Compile Include="Integration\GateHttpRequest.cs" />
-    <Compile Include="Integration\GateHttpResponse.cs" />
+    <Compile Include="AspNetRemote.cs" />
+    <Compile Include="AspNetAdapter.cs" />
+    <Compile Include="Integration\CrossDomainResponseData.cs" />
+    <Compile Include="Integration\GateWorkerRequest.cs" />
+    <Compile Include="Integration\CrossDomainRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

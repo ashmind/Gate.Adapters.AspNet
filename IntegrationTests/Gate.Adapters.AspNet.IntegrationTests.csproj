@@ -7,8 +7,8 @@
     <ProjectGuid>{BDAF9111-8EF6-448B-8690-19E99A94D3C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gate.Adapters.AspNetMvc.IntegrationTests</RootNamespace>
-    <AssemblyName>Gate.Adapters.AspNetMvc.IntegrationTests</AssemblyName>
+    <RootNamespace>Gate.Adapters.AspNet.IntegrationTests</RootNamespace>
+    <AssemblyName>Gate.Adapters.AspNet.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -71,13 +71,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IntegrationTests.WebSite\Gate.Adapters.AspNetMvc.IntegrationTests.WebSite.csproj">
+    <ProjectReference Include="..\IntegrationTests.WebSite\Gate.Adapters.AspNet.IntegrationTests.WebSite.csproj">
       <Project>{92b282e8-a2bc-499f-912c-db8a89b8b469}</Project>
-      <Name>Gate.Adapters.AspNetMvc.IntegrationTests.WebSite</Name>
+      <Name>Gate.Adapters.AspNet.IntegrationTests.WebSite</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Main\Gate.Adapters.AspNetMvc.csproj">
+    <ProjectReference Include="..\Main\Gate.Adapters.AspNet.csproj">
       <Project>{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}</Project>
-      <Name>Gate.Adapters.AspNetMvc</Name>
+      <Name>Gate.Adapters.AspNet</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
