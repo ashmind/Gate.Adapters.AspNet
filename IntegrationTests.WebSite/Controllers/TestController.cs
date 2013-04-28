@@ -10,6 +10,11 @@ namespace Gate.Adapters.AspNet.IntegrationTests.WebSite.Controllers {
             return this.Content(content, "text/plain");
         }
 
+        [HttpPost]
+        public ActionResult ContentFromForm([Form] string content) {
+            return this.Content(content, "text/plain");
+        }
+
         public ActionResult ViewFromQueryString([QueryString] string content) {
             return this.View("String", (object)content);
         }

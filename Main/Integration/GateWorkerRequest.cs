@@ -13,6 +13,18 @@ namespace Gate.Adapters.AspNet.Integration {
             this._responseData = responseData;
         }
 
+        public override string GetHttpVerbName() {
+            return this._requestData.HttpVerbName;
+        }
+
+        public override string GetHttpVersion() {
+            return this._requestData.HttpVersion;
+        }
+
+        public override string GetRawUrl() {
+            return this._requestData.RawUrl;
+        }
+
         public override string GetUriPath() {
             return this._requestData.UriPath;
         }
@@ -21,16 +33,17 @@ namespace Gate.Adapters.AspNet.Integration {
             return this._requestData.QueryString;
         }
 
-        public override string GetRawUrl() {
-            return this._requestData.RawUrl;
+        public override string GetKnownRequestHeader(int index) {
+            var name = HttpWorkerRequest.GetKnownRequestHeaderName(index);
+            string value;
+            if (!this._requestData.Headers.TryGetValue(name, out value))
+                return null;
+
+            return value;
         }
 
-        public override string GetHttpVerbName() {
-            return this._requestData.HttpVerbName;
-        }
-
-        public override string GetHttpVersion() {
-            return this._requestData.HttpVersion;
+        public override byte[] GetPreloadedEntityBody() {
+            return _requestData.Body;
         }
 
         public override string GetRemoteAddress() {
@@ -64,7 +77,7 @@ namespace Gate.Adapters.AspNet.Integration {
         }
 
         public override void SendResponseFromMemory(byte[] data, int length) {
-            this._responseData.MemoryData.Add(Tuple.Create(data, length));
+            this._responseData.Body.Add(Tuple.Create(data, length));
         }
 
         public override void SendResponseFromFile(string filename, long offset, long length) {

@@ -6,7 +6,7 @@ namespace Gate.Adapters.AspNet.Integration {
     [Serializable]
     public class CrossDomainResponseData {
         public CrossDomainResponseData() {
-            this.MemoryData = new List<Tuple<byte[], int>>();
+            this.Body = new List<Tuple<byte[], int>>();
             this.Headers = new Dictionary<string, string>();
         }
 
@@ -14,6 +14,6 @@ namespace Gate.Adapters.AspNet.Integration {
         public string StatusDescription { get; set; }
 
         public IDictionary<string, string> Headers { get; private set; }
-        public IList<Tuple<byte[], int>> MemoryData { get; private set; }
+        public IList<Tuple<byte[], int>> Body { get; private set; }
     }
 }

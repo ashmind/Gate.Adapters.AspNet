@@ -3,16 +3,15 @@ using Microsoft.Owin.Hosting;
 
 namespace Gate.Adapters.AspNet.IntegrationTests.Internal {
     public static class TestHost {
-        private const string UrlInternal = "http://localhost:8087";
+        private static readonly Uri _url = new Uri("http://localhost:8087");
 
-        // note: must not expose constant as we want the static constructor to run
-        // when this is accessed
-        public static string Url {
-            get { return UrlInternal; }
+        // causes static constructor to run
+        public static Uri Url {
+            get { return _url; }
         }
 
         static TestHost()  {
-            var server = WebApplication.Start<TestHostStartup>(UrlInternal);
+            var server = WebApplication.Start<TestHostStartup>(_url.ToString());
             AppDomain.CurrentDomain.DomainUnload += (sender, args) => server.Dispose();
         }
     }

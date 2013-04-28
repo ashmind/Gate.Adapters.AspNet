@@ -44,12 +44,17 @@ namespace Gate.Adapters.AspNet {
         private CrossDomainRequestData CreateRequestData(IDictionary<string, object> environment) {
             var request = new Request(environment);
             var rawUrl = request.Path + "?" + request.QueryString;
+            var headers = request.Headers.ToDictionary(h => h.Key, h => string.Join(",", h.Value));
+            var body = new MemoryStream();
+            request.Body.CopyTo(body);
 
-            return new CrossDomainRequestData(rawUrl,
+            return new CrossDomainRequestData(request.Version,
+                                              request.Method,
+                                              rawUrl,
                                               request.Path,
                                               request.QueryString,
-                                              request.Method,
-                                              request.Version);
+                                              headers,
+                                              body.ToArray());
         }
 
         private void ProcessResponse(IDictionary<string, object> environment, CrossDomainResponseData responseData, TaskCompletionSource<object> parent) {
@@ -84,7 +89,7 @@ namespace Gate.Adapters.AspNet {
                 response.Headers.Add(pair.Key, new[] { pair.Value });
             }
 
-            foreach (var data in responseData.MemoryData) {
+            foreach (var data in responseData.Body) {
                 response.Write(data.Item1, 0, data.Item2);
             }
         }
