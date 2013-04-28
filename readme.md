@@ -1,4 +1,4 @@
-This is an unofficial ASP.NET adapter for [Gate](https://github.com/owin/gate).
+This is an unofficial ASP.NET (MVC) adapter for [Gate](https://github.com/owin/gate).
 
 Theoretically, it allows self-hosting of any ASP.NET application using [Katana](https://katanaproject.codeplex.com/) or any other other [OWIN](http://owin.org/)-compatible host.
 
