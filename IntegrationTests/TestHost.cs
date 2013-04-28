@@ -3,12 +3,17 @@ using Microsoft.Owin.Hosting;
 
 namespace Gate.Adapters.AspNetMvc.IntegrationTests {
     public static class TestHost {
-        public const string Url = "http://localhost/8087";
+        private const string UrlInternal = "http://localhost:8087";
 
-        private static IDisposable server;
+        // note: must not expose constant as we want the static constructor to run
+        // when this is accessed
+        public static string Url {
+            get { return UrlInternal; }
+        }
 
-        public static void EnsureStarted() {
-            server = WebApplication.Start<TestHostStartup>(Url);
+        static TestHost()  {
+            var server = WebApplication.Start<TestHostStartup>(UrlInternal);
+            AppDomain.CurrentDomain.DomainUnload += (sender, args) => server.Dispose();
         }
     }
 }
