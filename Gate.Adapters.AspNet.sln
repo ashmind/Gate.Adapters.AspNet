@@ -8,11 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CD86A0
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNet", "Main\Gate.Adapters.AspNet.csproj", "{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNet.IntegrationTests.WebSite", "IntegrationTests.WebSite\Gate.Adapters.AspNet.IntegrationTests.WebSite.csproj", "{92B282E8-A2BC-499F-912C-DB8A89B8B469}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{BDAF9111-8EF6-448B-8690-19E99A94D3C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gate.Adapters.AspNet.IntegrationTests", "IntegrationTests\Gate.Adapters.AspNet.IntegrationTests.csproj", "{BDAF9111-8EF6-448B-8690-19E99A94D3C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleHost", "TestConsoleHost\TestConsoleHost.csproj", "{85992CAF-CF5F-4774-8297-FB7B30E68B22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebSite", "TestWebSite\TestWebSite.csproj", "{92B282E8-A2BC-499F-912C-DB8A89B8B469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,14 +26,18 @@ Global
 		{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50AE7229-8955-44DD-81E2-CCD4EB0BDB15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BDAF9111-8EF6-448B-8690-19E99A94D3C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BDAF9111-8EF6-448B-8690-19E99A94D3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDAF9111-8EF6-448B-8690-19E99A94D3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDAF9111-8EF6-448B-8690-19E99A94D3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85992CAF-CF5F-4774-8297-FB7B30E68B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85992CAF-CF5F-4774-8297-FB7B30E68B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85992CAF-CF5F-4774-8297-FB7B30E68B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85992CAF-CF5F-4774-8297-FB7B30E68B22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,9 +5,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Gate.Adapters.AspNet.IntegrationTests.WebSite.App_Start;
+using Gate.Adapters.AspNet.TestWebSite.App_Start;
 
-namespace Gate.Adapters.AspNet.IntegrationTests.WebSite {
+namespace Gate.Adapters.AspNet.TestWebSite {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 

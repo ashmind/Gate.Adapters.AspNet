@@ -1,0 +1,11 @@
+﻿@model IEnumerable<System.Reflection.MethodInfo>
+@{ ViewBag.Title = "Index"; }
+
+<!-- This page is for user -->
+
+<h2>Available actions:</h2>
+<ul>
+@foreach (var action in Model) {
+   <li>@action.Name</li>
+}
+</ul>
