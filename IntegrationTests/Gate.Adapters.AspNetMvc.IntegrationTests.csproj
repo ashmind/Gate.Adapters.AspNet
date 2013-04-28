@@ -62,10 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicResponseTests.cs" />
-    <Compile Include="HttpTestHelper.cs" />
-    <Compile Include="TestHost.cs" />
+    <Compile Include="Internal\HttpTestHelper.cs" />
+    <Compile Include="Internal\TestHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestHostStartup.cs" />
+    <Compile Include="Internal\TestHostStartup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

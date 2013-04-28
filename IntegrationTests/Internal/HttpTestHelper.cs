@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace Gate.Adapters.AspNetMvc.IntegrationTests {
+namespace Gate.Adapters.AspNetMvc.IntegrationTests.Internal {
     public static class HttpTestHelper {
         public static string GetString(string url) {
             var request = WebRequest.CreateHttp(TestHost.Url + url);

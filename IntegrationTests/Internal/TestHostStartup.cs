@@ -2,11 +2,11 @@
 using Gate.Adapters.AspNetMvc.IntegrationTests.WebSite;
 using Owin;
 
-namespace Gate.Adapters.AspNetMvc.IntegrationTests {
+namespace Gate.Adapters.AspNetMvc.IntegrationTests.Internal {
     public class TestHostStartup {
         public void Configuration(IAppBuilder app) {
             var webSitePath = Path.Combine(Path.GetDirectoryName(this.GetType().Assembly.Location), @"..\..\..\IntegrationTests.WebSite");
-            app.Use(typeof(AspNetMvcAdapter), webSitePath, new MvcApplication());
+            app.Use(typeof(AspNetMvcAdapter), new AspNetMvcInitializer(webSitePath, new MvcApplication()));
         }
     }
 }

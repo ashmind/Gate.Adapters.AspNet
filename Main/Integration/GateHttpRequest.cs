@@ -7,19 +7,32 @@ using System.Web;
 namespace Gate.Adapters.AspNetMvc.Integration {
     public class GateHttpRequest : HttpRequestBase {
         private readonly Request _request;
+        private readonly GateHttpBrowserCapabilities _browser;
+        private readonly NameValueCollection _headers;
+        private readonly HttpCookieCollection _cookies;
         private readonly NameValueCollection _queryString;
         private readonly NameValueCollection _form;
         private readonly GateHttpFileCollection _files;
 
         public GateHttpRequest(Request request) {
             _request = request;
-            _form = new NameValueCollection();
-            _queryString = new NameValueCollection();
+            _browser = new GateHttpBrowserCapabilities();
+            _headers = new NameValueCollection();
+            foreach (var pair in request.Headers) {
+                _headers[pair.Key] = string.Join(",", pair.Value);
+            }
 
+            _cookies = new HttpCookieCollection();
+            foreach (var pair in request.Cookies) {
+                _cookies.Add(new HttpCookie(pair.Key, pair.Value));
+            }
+
+            _queryString = new NameValueCollection();
             foreach (var pair in request.Query) {
                 _queryString.Add(pair.Key, pair.Value);
             }
 
+            _form = new NameValueCollection();
             foreach (var pair in request.ReadForm()) {
                 _form.Add(pair.Key, pair.Value);
             }
@@ -34,6 +47,22 @@ namespace Gate.Adapters.AspNetMvc.Integration {
         public override string ContentType {
             get { return _request.ContentType ?? ""; }
             set { throw new NotSupportedException("Request cannot be changed."); }
+        }
+
+        public override NameValueCollection Headers {
+            get { return _headers; }
+        }
+
+        public override HttpBrowserCapabilitiesBase Browser {
+            get { return _browser; }
+        }
+
+        public override string UserAgent {
+            get { return this.Headers["User-Agent"]; }
+        }
+
+        public override HttpCookieCollection Cookies {
+            get { return _cookies; }
         }
 
         public override string PathInfo {

@@ -86,7 +86,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspNetMvcAdapter.cs" />
+    <Compile Include="AspNetMvcInitializer.cs" />
+    <Compile Include="Integration\GateHttpBrowserCapabilities.cs" />
     <Compile Include="Integration\GateHttpFileCollection.cs" />
+    <Compile Include="Integration\GateHttpServerUtility.cs" />
+    <Compile Include="Integration\RazorViewEngineWithoutBuildManager.cs" />
+    <Compile Include="Integration\RazorViewWithoutBuildManager.cs" />
     <Compile Include="Integration\ValueProviderFactoryWithoutSupportForUnvalidated.cs" />
     <Compile Include="Integration\ControllerFactoryWithoutBuildManager.cs" />
     <Compile Include="Integration\MvcHandlerAccessor.cs" />

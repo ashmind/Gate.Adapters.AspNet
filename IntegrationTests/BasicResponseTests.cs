@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
+using Gate.Adapters.AspNetMvc.IntegrationTests.Internal;
 using Xunit;
 
 namespace Gate.Adapters.AspNetMvc.IntegrationTests
@@ -12,8 +11,13 @@ namespace Gate.Adapters.AspNetMvc.IntegrationTests
         [Fact]
         public void Content_FromQueryString() {
             var result = HttpTestHelper.GetString("/Test/ContentFromQueryString?content=ABC");
-
             Assert.Equal("ABC", result);
+        }
+
+        [Fact]
+        public void View_FromQueryString() {
+            var result = HttpTestHelper.GetString("/Test/ViewFromQueryString?content=Unicorn");
+            Assert.Contains("Unicorn", result);
         }
     }
 }
