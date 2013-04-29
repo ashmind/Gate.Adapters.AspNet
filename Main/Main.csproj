@@ -34,10 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Argument">
-      <HintPath>..\packages\Argument.0.9.6\lib\net45\Argument.dll</HintPath>
+      <HintPath>..\#packages\Argument.0.9.6\lib\net45\Argument.dll</HintPath>
     </Reference>
     <Reference Include="Gate">
-      <HintPath>..\packages\Gate.0.27\lib\net40\Gate.dll</HintPath>
+      <HintPath>..\#packages\Gate.0.27\lib\net40\Gate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
