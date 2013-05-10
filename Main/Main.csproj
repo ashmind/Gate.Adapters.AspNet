@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetAdapterArguments.cs" />
     <Compile Include="AspNetRemote.cs" />
     <Compile Include="AspNetAdapter.cs" />
     <Compile Include="Integration\CrossDomainResponseData.cs" />

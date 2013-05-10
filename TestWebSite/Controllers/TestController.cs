@@ -21,6 +21,11 @@ namespace Gate.Adapters.AspNet.TestWebSite.Controllers {
             return this.Content(content, "text/plain");
         }
 
+        public ActionResult ContentFromApplicationData() {
+            var content = HttpContext.Application["Test.Data"] as string;
+            return this.Content(content, "text/plain");
+        }
+
         public ActionResult ViewFromQueryString([QueryString] string content) {
             return this.View("String", (object)content);
         }

@@ -12,18 +12,20 @@ namespace Gate.Adapters.AspNet {
         private readonly Func<IDictionary<string, object>, Task> _next;
         private readonly AspNetRemote _remote;
 
-        public AspNetAdapter(Func<IDictionary<string, object>, Task> next, string appPhysicalPath) {
+        public AspNetAdapter(Func<IDictionary<string, object>, Task> next, AspNetAdapterArguments arguments) {
             this._next = next;
-            this._remote = this.CreateAspNetRemote(appPhysicalPath);
+            this._remote = this.CreateAspNetRemote(Argument.NotNull("arguments", arguments));
         }
 
-        private AspNetRemote CreateAspNetRemote(string appPhysicalPath) {
+        private AspNetRemote CreateAspNetRemote(AspNetAdapterArguments arguments) {
             // pretty terrible, any better ideas?
             var assembly = Assembly.GetExecutingAssembly();
-            File.Copy(assembly.Location, Path.Combine(appPhysicalPath, "bin", Path.GetFileName(assembly.Location)), true);
+            File.Copy(assembly.Location, Path.Combine(arguments.ApplicationPhysicalPath, "bin", Path.GetFileName(assembly.Location)), true);
             // might be useful to copy dependencies as well
 
-            return (AspNetRemote)ApplicationHost.CreateApplicationHost(typeof(AspNetRemote), "/", appPhysicalPath);
+            var remote = (AspNetRemote)ApplicationHost.CreateApplicationHost(typeof(AspNetRemote), "/", arguments.ApplicationPhysicalPath);
+            remote.SetApplicationData(arguments.ApplicationData);
+            return remote;
         }
 
         public Task Invoke(IDictionary<string, object> environment) {
@@ -67,6 +69,7 @@ namespace Gate.Adapters.AspNet {
 
                     parent.SetResult(null);
                 });
+                return;
             }
 
             try {

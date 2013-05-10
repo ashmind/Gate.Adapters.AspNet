@@ -23,6 +23,12 @@ namespace Gate.Adapters.AspNet.IntegrationTests {
         }
 
         [Fact]
+        public void Content_FromApplicationData() {
+            var result = HttpTestHelper.GetString("/Test/ContentFromApplicationData");
+            Assert.Equal(TestHost.TestApplicationDataValue, result);
+        }
+
+        [Fact]
         public void View_FromQueryString() {
             var result = HttpTestHelper.GetString("/Test/ViewFromQueryString?content=Unicorn");
             Assert.Contains("Unicorn", result);

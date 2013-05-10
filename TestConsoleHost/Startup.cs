@@ -6,7 +6,7 @@ namespace Gate.Adapters.AspNet.TestConsoleHost {
         public void Configuration(IAppBuilder app) {
             var webSitePath = Path.Combine(Path.GetDirectoryName(this.GetType().Assembly.Location), @"..\..\..\IntegrationTests.WebSite");
             webSitePath = Path.GetFullPath(webSitePath);
-            app.Use(typeof(AspNetAdapter), webSitePath);
+            app.Use(typeof(AspNetAdapter), new AspNetAdapterArguments(webSitePath));
         }
     }
 }
