@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "other", "other", "{DB170B45
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebSite.Dependencies", "TestWebSite.Dependencies\TestWebSite.Dependencies.csproj", "{335EE47C-2265-4B72-87CE-83E1144E0D6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92B282E8-A2BC-499F-912C-DB8A89B8B469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335EE47C-2265-4B72-87CE-83E1144E0D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335EE47C-2265-4B72-87CE-83E1144E0D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335EE47C-2265-4B72-87CE-83E1144E0D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335EE47C-2265-4B72-87CE-83E1144E0D6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

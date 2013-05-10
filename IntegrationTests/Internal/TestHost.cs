@@ -3,8 +3,8 @@ using Microsoft.Owin.Hosting;
 
 namespace Gate.Adapters.AspNet.IntegrationTests.Internal {
     public static class TestHost {
-        public const string TestApplicationDataKey = "Test.Data";
         public const string TestApplicationDataValue = "Magic";
+        public const string TestApplicationDataProviderValue = "Mirror";
 
         private static readonly Uri _url = new Uri("http://localhost:8087");
 

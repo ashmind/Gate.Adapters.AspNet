@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.ModelBinding;
 using System.Web.Mvc;
+using TestWebSite.Dependencies;
 
 namespace Gate.Adapters.AspNet.TestWebSite.Controllers {
     public class TestController : Controller {
@@ -24,6 +25,11 @@ namespace Gate.Adapters.AspNet.TestWebSite.Controllers {
         public ActionResult ContentFromApplicationData() {
             var content = HttpContext.Application["Test.Data"] as string;
             return this.Content(content, "text/plain");
+        }
+
+        public ActionResult ContentFromApplicationDataRemotingObject() {
+            var provider = (IStringProvider)HttpContext.Application["Test.Data.Provider"];
+            return this.Content(provider.GetString(), "text/plain");
         }
 
         public ActionResult ViewFromQueryString([QueryString] string content) {

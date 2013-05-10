@@ -9,7 +9,8 @@ namespace Gate.Adapters.AspNet.IntegrationTests.Internal {
             webSitePath = Path.GetFullPath(webSitePath);
 
             var testApplicationData = new Dictionary<string, object> {
-                { TestHost.TestApplicationDataKey, TestHost.TestApplicationDataValue }
+                { "Test.Data", TestHost.TestApplicationDataValue },
+                { "Test.Data.Provider", new TestStringProvider(TestHost.TestApplicationDataProviderValue) }
             };
             app.Use(typeof(AspNetAdapter), new AspNetAdapterArguments(webSitePath, testApplicationData));
         }
