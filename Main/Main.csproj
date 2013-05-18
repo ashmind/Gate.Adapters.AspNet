@@ -52,9 +52,11 @@
     <Compile Include="AspNetAdapterArguments.cs" />
     <Compile Include="AspNetRemote.cs" />
     <Compile Include="AspNetAdapter.cs" />
-    <Compile Include="Integration\CrossDomainResponseData.cs" />
+    <Compile Include="Integration\CrossAppDomainAddressAndPort.cs" />
+    <Compile Include="Integration\CrossAppDomainDataConverter.cs" />
+    <Compile Include="Integration\CrossAppDomainResponseData.cs" />
     <Compile Include="Integration\GateWorkerRequest.cs" />
-    <Compile Include="Integration\CrossDomainRequestData.cs" />
+    <Compile Include="Integration\CrossAppDomainRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

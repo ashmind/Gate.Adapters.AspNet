@@ -1,42 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace Gate.Adapters.AspNet.Integration {
-    public class GateWorkerRequest : HttpWorkerRequest {
-        private readonly CrossDomainRequestData _requestData;
-        private readonly CrossDomainResponseData _responseData;
+    public class GateWorkerRequest : HttpWorkerRequest, IDisposable {
+        private readonly CrossAppDomainRequestData _requestData;
+        private readonly CrossAppDomainResponseData _responseData;
+        private readonly ManualResetEventSlim  _ended;
 
-        public GateWorkerRequest(CrossDomainRequestData requestData, CrossDomainResponseData responseData) {
-            this._requestData = requestData;
-            this._responseData = responseData;
+        public GateWorkerRequest(CrossAppDomainRequestData requestData, CrossAppDomainResponseData responseData) {
+            _requestData = requestData;
+            _responseData = responseData;
+            _ended = new ManualResetEventSlim();
         }
 
         public override string GetHttpVerbName() {
-            return this._requestData.HttpVerbName;
+            return _requestData.HttpVerbName;
         }
 
         public override string GetHttpVersion() {
-            return this._requestData.HttpVersion;
+            return _requestData.HttpVersion;
         }
 
         public override string GetRawUrl() {
-            return this._requestData.RawUrl;
+            return _requestData.RawUrl;
         }
 
         public override string GetUriPath() {
-            return this._requestData.UriPath;
+            return _requestData.UriPath;
         }
 
         public override string GetQueryString() {
-            return this._requestData.QueryString;
+            return _requestData.QueryString;
         }
 
         public override string GetKnownRequestHeader(int index) {
             var name = HttpWorkerRequest.GetKnownRequestHeaderName(index);
             string value;
-            if (!this._requestData.Headers.TryGetValue(name, out value))
+            if (!_requestData.Headers.TryGetValue(name, out value))
                 return null;
 
             return value;
@@ -47,52 +50,60 @@ namespace Gate.Adapters.AspNet.Integration {
         }
 
         public override string GetRemoteAddress() {
-            return "";
+            return _requestData.Remote.Address;
         }
 
         public override int GetRemotePort() {
-            return 0;
+            return _requestData.Remote.Port;
         }
 
         public override string GetLocalAddress() {
-            return "";
+            return _requestData.Local.Address;
         }
 
         public override int GetLocalPort() {
-            return 0;
+            return _requestData.Local.Port;
         }
 
         public override void SendStatus(int statusCode, string statusDescription) {
-            this._responseData.StatusCode = statusCode;
-            this._responseData.StatusDescription = statusDescription;
+            _responseData.StatusCode = statusCode;
+            _responseData.StatusDescription = statusDescription;
         }
 
         public override void SendKnownResponseHeader(int index, string value) {
             var name = HttpWorkerRequest.GetKnownRequestHeaderName(index);
-            this._responseData.Headers.Add(name, value);
+            _responseData.Headers.Add(name, value);
         }
 
         public override void SendUnknownResponseHeader(string name, string value) {
-            this._responseData.Headers.Add(name, value);
+            _responseData.Headers.Add(name, value);
         }
 
         public override void SendResponseFromMemory(byte[] data, int length) {
-            this._responseData.Body.Add(Tuple.Create(data, length));
+            _responseData.Body.Add(Tuple.Create(data, length));
         }
 
         public override void SendResponseFromFile(string filename, long offset, long length) {
-            throw new NotImplementedException();
+            throw new NotImplementedException("SendResponseFromFile is not implemented.");
         }
 
         public override void SendResponseFromFile(IntPtr handle, long offset, long length) {
-            throw new NotImplementedException();
+            throw new NotImplementedException("SendResponseFromFile is not implemented.");
         }
 
         public override void FlushResponse(bool finalFlush) {
         }
 
+        public void WaitForEnd() {
+            _ended.Wait();
+        }
+
         public override void EndOfRequest() {
-            // ???
+            _ended.Set();
+        }
+
+        public void Dispose() {
+            _ended.Dispose();
         }
     }
 }

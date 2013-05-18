@@ -8,8 +8,8 @@
     <owners>Andrey Shchekin</owners>
     <projectUrl>https://github.com/ashmind/Gate.Adapters.AspNet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>PRE-RELEASE, do not use.</description>
-    <releaseNotes>PRE-RELEASE</releaseNotes>
+    <description>PRE-RELEASE, do not use (but now supports SignalR).</description>
+    <releaseNotes>SignalR support, bug fixes.</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>gate owin aspnet aspnetmvc</tags>
     <dependencies>

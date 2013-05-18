@@ -12,7 +12,7 @@ namespace Gate.Adapters.AspNet.TestWebSite.Controllers {
             var actions = this.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
             return View(actions);
         }
-
+        
         public ActionResult ContentFromQueryString([QueryString] string content) {
             return this.Content(content, "text/plain");
         }

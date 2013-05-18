@@ -19,10 +19,6 @@ namespace Gate.Adapters.AspNet.TestWebSite {
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            var webFormViewEngine = ViewEngines.Engines.SingleOrDefault(e => e is WebFormViewEngine);
-            if (webFormViewEngine != null)
-                ViewEngines.Engines.Remove(webFormViewEngine);
         }
     }
 }

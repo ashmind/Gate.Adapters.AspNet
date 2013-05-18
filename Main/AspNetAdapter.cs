@@ -11,10 +11,12 @@ namespace Gate.Adapters.AspNet {
     public class AspNetAdapter {
         private readonly Func<IDictionary<string, object>, Task> _next;
         private readonly AspNetRemote _remote;
+        private readonly CrossAppDomainDataConverter _converter;
 
         public AspNetAdapter(Func<IDictionary<string, object>, Task> next, AspNetAdapterArguments arguments) {
-            this._next = next;
-            this._remote = this.CreateAspNetRemote(Argument.NotNull("arguments", arguments));
+            _next = next;
+            _remote = this.CreateAspNetRemote(Argument.NotNull("arguments", arguments));
+            _converter = new CrossAppDomainDataConverter();
         }
 
         private AspNetRemote CreateAspNetRemote(AspNetAdapterArguments arguments) {
@@ -30,7 +32,7 @@ namespace Gate.Adapters.AspNet {
 
         public Task Invoke(IDictionary<string, object> environment) {
             var parent = new TaskCompletionSource<object>();
-            Task.Factory.StartNew(() => this._remote.ProcessRequest(this.CreateRequestData(environment)))
+            Task.Factory.StartNew(() => _remote.ProcessRequest(_converter.CreateRequestData(environment)))
                         .ContinueWith(t => {
                             if (t.Exception != null) {
                                 parent.SetException(t.Exception);
@@ -43,25 +45,9 @@ namespace Gate.Adapters.AspNet {
             return parent.Task;
         }
 
-        private CrossDomainRequestData CreateRequestData(IDictionary<string, object> environment) {
-            var request = new Request(environment);
-            var rawUrl = request.Path + "?" + request.QueryString;
-            var headers = request.Headers.ToDictionary(h => h.Key, h => string.Join(",", h.Value));
-            var body = new MemoryStream();
-            request.Body.CopyTo(body);
-
-            return new CrossDomainRequestData(request.Version,
-                                              request.Method,
-                                              rawUrl,
-                                              request.Path,
-                                              request.QueryString,
-                                              headers,
-                                              body.ToArray());
-        }
-
-        private void ProcessResponse(IDictionary<string, object> environment, CrossDomainResponseData responseData, TaskCompletionSource<object> parent) {
+        private void ProcessResponse(IDictionary<string, object> environment, CrossAppDomainResponseData responseData, TaskCompletionSource<object> parent) {
             if (responseData.StatusCode == 404) {
-                this._next(environment).ContinueWith(t => {
+                _next(environment).ContinueWith(t => {
                     if (t.Exception != null) {
                         parent.SetException(t.Exception);
                         return;
@@ -73,7 +59,7 @@ namespace Gate.Adapters.AspNet {
             }
 
             try {
-                this.UpdateResponseData(responseData, environment);
+                _converter.UpdateWithResponseData(environment, responseData);
             }
             catch (Exception ex) {
                 parent.SetException(ex);
@@ -81,20 +67,6 @@ namespace Gate.Adapters.AspNet {
             }
 
             parent.SetResult(null);
-        }
-
-        private void UpdateResponseData(CrossDomainResponseData responseData, IDictionary<string, object> environment) {
-            var response = new Response(environment);
-            response.StatusCode = responseData.StatusCode;
-            response.ReasonPhrase = responseData.StatusDescription;
-
-            foreach (var pair in responseData.Headers) {
-                response.Headers.Add(pair.Key, new[] { pair.Value });
-            }
-
-            foreach (var data in responseData.Body) {
-                response.Write(data.Item1, 0, data.Item2);
-            }
         }
     }
 }

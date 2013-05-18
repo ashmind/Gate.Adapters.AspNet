@@ -7,9 +7,13 @@ using Gate.Adapters.AspNet.Integration;
 
 namespace Gate.Adapters.AspNet {
     public class AspNetRemote : MarshalByRefObject {
-        public CrossDomainResponseData ProcessRequest(CrossDomainRequestData requestData) {
-            var responseData = new CrossDomainResponseData();
-            HttpRuntime.ProcessRequest(new GateWorkerRequest(requestData, responseData));
+        public CrossAppDomainResponseData ProcessRequest(CrossAppDomainRequestData requestData) {
+            var responseData = new CrossAppDomainResponseData();
+            // can be rewritten to support true async later on (beginrequest/endrequest)
+            using (var request = new GateWorkerRequest(requestData, responseData)) {
+                HttpRuntime.ProcessRequest(request);
+                request.WaitForEnd();
+            }
             return responseData;
         }
 
