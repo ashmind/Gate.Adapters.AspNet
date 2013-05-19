@@ -54,6 +54,7 @@
     <Compile Include="AspNetAdapter.cs" />
     <Compile Include="Integration\CrossAppDomainAddressAndPort.cs" />
     <Compile Include="Integration\CrossAppDomainDataConverter.cs" />
+    <Compile Include="Integration\CrossAppDomainResponseFile.cs" />
     <Compile Include="Integration\CrossAppDomainResponseData.cs" />
     <Compile Include="Integration\GateWorkerRequest.cs" />
     <Compile Include="Integration\CrossAppDomainRequestData.cs" />

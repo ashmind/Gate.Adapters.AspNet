@@ -80,11 +80,20 @@ namespace Gate.Adapters.AspNet.Integration {
         }
 
         public override void SendResponseFromMemory(byte[] data, int length) {
-            _responseData.Body.Add(Tuple.Create(data, length));
+            if (_responseData.Files.Any())
+                throw new NotSupportedException("SendResponseFromMemory after SendResponseFromFile is not supported.");
+
+            var dataPart = data;
+            if (data.Length != length) {
+                dataPart = new byte[length];
+                Array.Copy(data, dataPart, length);
+            }
+
+            _responseData.Body.Add(dataPart);
         }
 
         public override void SendResponseFromFile(string filename, long offset, long length) {
-            throw new NotImplementedException("SendResponseFromFile is not implemented.");
+            _responseData.Files.Add(new CrossAppDomainResponseFile(filename, offset, length));
         }
 
         public override void SendResponseFromFile(IntPtr handle, long offset, long length) {

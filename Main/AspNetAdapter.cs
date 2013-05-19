@@ -30,43 +30,18 @@ namespace Gate.Adapters.AspNet {
             return remote;
         }
 
-        public Task Invoke(IDictionary<string, object> environment) {
-            var parent = new TaskCompletionSource<object>();
-            Task.Factory.StartNew(() => _remote.ProcessRequest(_converter.CreateRequestData(environment)))
-                        .ContinueWith(t => {
-                            if (t.Exception != null) {
-                                parent.SetException(t.Exception);
-                                return;
-                            }
-
-                            this.ProcessResponse(environment, t.Result, parent);
-                        });
-
-            return parent.Task;
+        public async Task Invoke(IDictionary<string, object> environment) {
+            var result = _remote.ProcessRequest(_converter.CreateRequestData(environment));
+            await this.ProcessResponse(environment, result);
         }
 
-        private void ProcessResponse(IDictionary<string, object> environment, CrossAppDomainResponseData responseData, TaskCompletionSource<object> parent) {
+        private async Task ProcessResponse(IDictionary<string, object> environment, CrossAppDomainResponseData responseData) {
             if (responseData.StatusCode == 404) {
-                _next(environment).ContinueWith(t => {
-                    if (t.Exception != null) {
-                        parent.SetException(t.Exception);
-                        return;
-                    }
-
-                    parent.SetResult(null);
-                });
+                await this._next(environment);
                 return;
             }
 
-            try {
-                _converter.UpdateWithResponseData(environment, responseData);
-            }
-            catch (Exception ex) {
-                parent.SetException(ex);
-                return;
-            }
-
-            parent.SetResult(null);
+            await this._converter.UpdateWithResponseData(environment, responseData);
         }
     }
 }

@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicResponseTests.cs" />
+    <Compile Include="FileTests.cs" />
     <Compile Include="Internal\HttpTestHelper.cs" />
     <Compile Include="Internal\TestHost.cs" />
     <Compile Include="Internal\TestStringProvider.cs" />

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Gate.Adapters.AspNet.Integration {
     public class CrossAppDomainDataConverter {
@@ -31,7 +33,7 @@ namespace Gate.Adapters.AspNet.Integration {
             return new CrossAppDomainAddressAndPort(address, port);
         }
 
-        public void UpdateWithResponseData(IDictionary<string, object> environment, CrossAppDomainResponseData responseData) {
+        public async Task UpdateWithResponseData(IDictionary<string, object> environment, CrossAppDomainResponseData responseData) {
             var response = new Response(environment);
             response.StatusCode = responseData.StatusCode;
             response.ReasonPhrase = responseData.StatusDescription;
@@ -41,8 +43,26 @@ namespace Gate.Adapters.AspNet.Integration {
             }
 
             foreach (var data in responseData.Body) {
-                response.Write(data.Item1, 0, data.Item2);
+                await response.WriteAsync(data);
             }
+
+            foreach (var file in responseData.Files) {
+                await SendFileToResponse(response, file);
+            }
+        }
+
+        private static async Task SendFileToResponse(Response response, CrossAppDomainResponseFile file) {
+            if (response.SendFileAsync != null) {
+                await response.SendFileAsync(file.Path, file.Length, file.Offset, CancellationToken.None);
+                return;
+            }
+
+            var buffer = new byte[file.Length - file.Offset];
+            using (var stream = File.OpenRead(file.Path)) {
+                stream.Seek(file.Offset, SeekOrigin.Begin);
+                await stream.ReadAsync(buffer, 0, (int)file.Length);
+            }
+            await response.WriteAsync(buffer);
         }
     }
 }
