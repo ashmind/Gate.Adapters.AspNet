@@ -8,5 +8,9 @@ namespace Gate.Adapters.AspNet.TestWebSite.Hubs {
         public string Roundtrip(string value) {
             return value;
         }
+
+        public void RaiseEvent(string value) {
+            Clients.Caller.Event(value);
+        }
     }
 }

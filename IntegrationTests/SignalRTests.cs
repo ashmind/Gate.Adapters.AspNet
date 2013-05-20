@@ -18,9 +18,28 @@ namespace Gate.Adapters.AspNet.IntegrationTests {
         }
 
         [Fact]
-        public async Task String_Roundtrip() {
+        public async Task Roundtrip() {
             var result = await _hub.Invoke<string>("Roundtrip", "ABCDEF");
             Assert.Equal("ABCDEF", result);
+        }
+
+        [Fact]
+        public async Task Roundtrip_MultipleTimes() {
+            await _hub.Invoke<string>("Roundtrip", "First");
+            await _hub.Invoke<string>("Roundtrip", "Second");
+
+            var result = await _hub.Invoke<string>("Roundtrip", "Third");
+            Assert.Equal("Third", result);
+        }
+
+        [Fact]
+        public async Task Event() {
+            var eventResult = new TaskCompletionSource<string>();
+            
+            _hub.On("Event", s => eventResult.SetResult(s));
+            await _hub.Invoke<string>("RaiseEvent", "ABCDEF");
+
+            Assert.Equal("ABCDEF", await eventResult.Task);
         }
 
         public void Dispose() {
