@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Owin;
 
@@ -8,7 +9,7 @@ namespace Gate.Adapters.AspNet.IntegrationTests.Internal {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             //CodeBase references where the assembly originally was stored. Location pointed to somewhere Temp
             var webSitePath = Path.Combine(Path.GetDirectoryName(assembly.CodeBase), @"..\..\..\TestWebSite");
-            webSitePath = Path.GetFullPath(webSitePath);
+            webSitePath = Path.GetFullPath(new Uri(webSitePath).LocalPath);
 
             var testApplicationData = new Dictionary<string, object> {
                 { "Test.Data", TestHost.TestApplicationDataValue },
