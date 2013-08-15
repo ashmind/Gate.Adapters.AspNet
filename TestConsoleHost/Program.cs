@@ -19,7 +19,7 @@ namespace Gate.Adapters.AspNet.TestConsoleHost {
         }
 
         private static void MainThatCanThrow() {
-            var url = "http://localhost:60880";
+            var url = "http://localhost:60880/";
 
             Console.WriteLine("Starting server at {0}.", url);
             using (WebApplication.Start<Startup>(url)) {
